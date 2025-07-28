@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Teacher's Proxy</title>
+  <style>
+    html, body {
+      height: 100%;
+      margin: 0;
+    }
+    body {
+      font-family: Arial, sans-serif;
+      background: linear-gradient(rgba(0, 0, 255, 0.05), rgba(0, 0, 255, 0.05)), url('https://res.cloudinary.com/dwfheimtj/image/upload/v1753623869/IMG_1736_ss2tpe.jpg') no-repeat center center fixed;
+      background-size: cover;
+      color: #2d2da4;
+    }
+    .overlay {
+      min-height: 100vh;
+      width: 100vw;
+      padding: 20px;
+      box-sizing: border-box;
+      background-color: rgba(255, 255, 255, 0.5);
+      backdrop-filter: blur(6px);
+    }
+    .container {
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+    .sidebar {
+      width: 250px;
+      background: rgba(255, 255, 255, 0.95);
+      border: 3px solid #2d2da4;
+      padding: 15px;
+      box-sizing: border-box;
+    }
+    .logo {
+      width: 180px;
+      height: 180px;
+      border-radius: 50%;
+      border: 3px solid #2d2da4;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      font-size: 18px;
+      margin: auto;
+    }
+    h1 {
+      text-align: center;
+      color: #2d2da4;
+      font-size: 24px;
+      margin-bottom: 10px;
+    }
+    select {
+      width: 100%;
+      padding: 8px;
+      margin: 10px 0;
+    }
+    .leave-list {
+      border: 2px solid #2d2da4;
+      padding: 10px;
+      height: 400px;
+      overflow-y: auto;
+      background-color: rgba(255, 255, 255, 0.9);
+    }
+    .main {
+      flex: 1;
+      overflow-x: auto;
+      background-color: rgba(255, 255, 255, 0.9);
+      padding: 10px;
+      border-radius: 6px;
+    }
+    table {
+      border-collapse: collapse;
+      width: 100%;
+      min-width: 1000px;
+      transform: scale(0.9);
+      transform-origin: top left;
+    }
+    th, td {
+      border: 1px solid #2d2da4;
+      text-align: center;
+      padding: 4px;
+      height: 32px;
+      font-size: 14px;
+      width: 80px;
+      max-width: 80px;
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+    }
+    th {
+      background: #e3e3ff;
+    }
+    td[contenteditable="true"]:hover {
+      background-color: #f0f8ff;
+      cursor: text;
+    }
+  </style>
+</head>
+<body>
+  <div class="overlay">
+    <h1>CHANDMARI HIGHER SECONDARY SCHOOL<br>Teacher's Proxy</h1>
+    <div class="container">
+      <div class="sidebar">
+        <div class="logo">
+          <img src="https://res.cloudinary.com/dwfheimtj/image/upload/v1749614028/SSSSSSSSSSSSSS_yrbkds.png" alt="School Logo" style="width: 100%; height: 100%; border-radius: 50%; object-fit: cover;">
+        </div>
+        <h3>Teacher's List</h3>
+        <label for="teacherDropdown">Select teacher:</label>
+        <select id="teacherDropdown" onchange="addTeacherOnLeave()">
+          <option disabled selected>Select teacher</option>
+          <option>AKUMLA GRACE</option>
+          <option>AMENLA</option>
+          <option>ANAND SAHI</option>
+          <option>AOSENLA</option>
+          <option>APUNO KIRE</option>
+          <option>BENCHACHILA AIER</option>
+          <option>BENDANGNARO IMSONG</option>
+          <option>BENDANGSENLA IMSONG</option>
+          <option>BENDISEN JAMIR</option>
+          <option>CELINA</option>
+          <option>CHUBANUNGLA</option>
+          <option>CHUBAREN</option>
+          <option>CHUBATANGIT</option>
+          <option>DHAN PRASAD SHARMA</option>
+          <option>ELIKA MALING</option>
+          <option>EMKUMMENLA</option>
+          <option>GINPU KIPGEN</option>
+          <option>IMNATOLA SANGTAM</option>
+          <option>JOYLYROSE CHIPHANG</option>
+          <option>K. STALIN</option>
+          <option>KETHOLENO TASE</option>
+          <option>MARSENLA KICHU</option>
+          <option>MARY KONYAK</option>
+          <option>MATIA ANAR</option>
+          <option>MHALEZONO ZHASA</option>
+          <option>MOAMENLA</option>
+          <option>NEIMENUO</option>
+          <option>NEISEDENO</option>
+          <option>NONGOZOL RHETSO</option>
+          <option>NYANBENI NGULLIE</option>
+          <option>OBED</option>
+          <option>OM PRAKASH GUPTA</option>
+          <option>PRADIP DEB ROY</option>
+          <option>RENBENI NGULLIE</option>
+          <option>SEEMA DHAR</option>
+          <option>T. AYANGLA AIER</option>
+          <option>TEMSUJUNGBA LONGKUMER</option>
+          <option>TEMSURENLA</option>
+          <option>THOTHUNGO TSOPOE</option>
+          <option>TOSHIJUNGLA LONGKUMER</option>
+          <option>VENEHULU</option>
+          <option>VINIKA Y. YEPTHO</option>
+          <option>VIZAKHONO</option>
+          <option>YIBENTHUNG</option>
+          <option>ZUBENI NGULLIE</option>
+          <option>T.K SINGH</option>
+          <option>BENDANG</option>
+        </select>
+        <h3>Teacher's on leave</h3>
+        <div class="leave-list" id="leaveList"></div>
+      </div>
+      <div class="main">
+        <button onclick="toggleTableSplit()">Toggle Class View</button>
+        <table>
+          <thead>
+            <tr>
+              <th>CLASS</th>
+              <th>1st</th>
+              <th>2nd</th>
+              <th>3rd</th>
+              <th>4th</th>
+              <th>5th</th>
+              <th>6th</th>
+              <th>7th</th>
+              <th>8th</th>
+            </tr>
+          </thead>
+          <tbody id="tableBody"></tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  <script>
+    function addTeacherOnLeave() {
+      const dropdown = document.getElementById('teacherDropdown');
+      const selectedName = dropdown.value;
+      const leaveList = document.getElementById('leaveList');
+
+      const existing = Array.from(leaveList.children).map(p => p.textContent);
+      if (!existing.includes(selectedName)) {
+        const p = document.createElement('p');
+        p.textContent = selectedName;
+        p.style.cursor = "pointer";
+        p.title = "Click to remove";
+        p.onclick = () => p.remove();
+        leaveList.appendChild(p);
+      }
+
+      dropdown.selectedIndex = 0;
+    }
+
+    const classList = ["A", "B", "1A", "1B", "2A", "2B", "3A", "3B", "4A", "4B", "5A", "5B", "6A", "6B", "7A", "7B", "8A", "8B", "9A", "9B", "10A", "10B", "10C", "11A", "11B", "11C", "12A", "12B", "12C"];
+    const tableBody = document.getElementById("tableBody");
+    classList.forEach(cls => {
+      const tr = document.createElement("tr");
+      tr.innerHTML = `<td>${cls}</td>` + '<td contenteditable="true"></td>'.repeat(8);
+      tableBody.appendChild(tr);
+    });
+
+    const rows = Array.from(document.querySelectorAll("tbody tr"));
+    let showTop = true;
+
+    function toggleTableSplit() {
+      rows.forEach((row, i) => {
+        row.style.display = showTop ? (i < 15 ? "table-row" : "none") : (i >= 15 ? "table-row" : "none");
+      });
+      showTop = !showTop;
+    }
+
+    toggleTableSplit();
+    setInterval(toggleTableSplit, 5000);
+  </script>
+</body>
+</html>
